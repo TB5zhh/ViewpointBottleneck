@@ -19,9 +19,14 @@ callgrind.out*
 # Misc
 .DS_Store
 
+# ==== Viewpoint Bottleneck ====
+
 log/
 
 # Checkpoints
 *.pth
 
 .vscode/
+
+# Dataset path
+datasets/
