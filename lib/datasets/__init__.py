@@ -1,7 +1,7 @@
 import lib.datasets.synthia as synthia
 import lib.datasets.stanford as stanford
 import lib.datasets.scannet as scannet
-import lib.datasets.scannet_test as scannet_test
+# import lib.datasets.scannet_test as scannet_test
 
 DATASETS = []
 
@@ -13,7 +13,7 @@ def add_datasets(module):
 add_datasets(stanford)
 add_datasets(synthia)
 add_datasets(scannet)
-add_datasets(scannet_test)
+# add_datasets(scannet_test)
 
 
 def load_dataset(name):
@@ -27,6 +27,6 @@ def load_dataset(name):
     for dataset in DATASETS:
       print('\t* {}'.format(dataset.__name__))
     raise ValueError(f'Dataset {name} not defined')
-  DatasetClass = mdict[name]
+  dataset_class = mdict[name]
 
-  return DatasetClass
+  return dataset_class
