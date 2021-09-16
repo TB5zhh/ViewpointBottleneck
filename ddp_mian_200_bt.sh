@@ -5,7 +5,7 @@ set -x
 set -e
 
 set -o pipefail
-export CUDA_VISIBLE_DEVICES=2,3
+export CUDA_VISIBLE_DEVICES=0,3
 PYTHONUNBUFFERED="True"
 DATAPATH=/data/luoly/dataset/Min_scan/eff_200/train
 TESTDATAPATH=/data/luoly/dataset/Min_scan/scan_processed/train

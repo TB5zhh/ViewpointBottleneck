@@ -34,10 +34,10 @@ def setup_logging(config):
     handlers = [logging.StreamHandler(sys.stdout)]
 
     # FIXME update config 'run_name', 'log_dir', 'logging'
-    if config.logging:
-        handlers.append(
-            logging.StreamHandler(
-                os.path.join(config.log_dir, f'{config.run_name} - {timestamp()}.log')))
+    # if config.logging:
+    #     handlers.append(
+    #         logging.StreamHandler(
+    #             os.path.join(config.log_dir, f'{config.run_name} - {timestamp()}.log')))
 
     # TODO add file handler
     if config.distributed_world_size > 1 and config.distributed_rank > 0:
@@ -88,6 +88,7 @@ def main_worker(config, init_distributed=False):
 
     # setup initial seed
     # TODO check if python and numpy seed need to be set
+    torch.cuda.set_device(config.device_id) # important
     torch.manual_seed(config.seed)
     torch.cuda.manual_seed(config.seed)
 
