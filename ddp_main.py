@@ -102,7 +102,7 @@ def main_worker(config, init_distributed=False):
     logging.info('====> Configurations <====')
     dconfig = vars(config)
     for k, v in dconfig.items():
-        logging.info(f'----> {k:>20}: {v}')
+        logging.info(f'----> {k:>30}: {v}')
 
     train_dataset_class = load_dataset(config.dataset)
     test_dataset_class = load_dataset(config.testdataset)

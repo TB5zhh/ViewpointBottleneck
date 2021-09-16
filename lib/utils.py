@@ -84,7 +84,8 @@ def precision_at_one(pred, target, ignore_label=255):
     pred = pred.view(1, -1)
     target = target.view(1, -1)
     correct = pred.eq(target)
-    correct = correct[target != ignore_label]
+    correct = torch.where(target != ignore_label, correct, torch.zeros_like(correct))
+    # correct = correct[target != ignore_label]
     correct = correct.view(-1)
     if correct.nelement():
         return correct.float().sum(0).mul(100.0 / correct.size(0)).item()

@@ -136,10 +136,18 @@ class Voxelizer:
     M_t[:3, -1] = -min_coords
     rigid_transformation = M_t @ rigid_transformation
     coords_aug = np.floor(coords_aug - min_coords)
+    # from logging import info
+    # info(f'before ME: {type(coords_aug)}, {type(feats)}, {type(labels)}')
 
     # key = self.hash(coords_aug)  # floor happens by astype(np.uint64)
     coords_aug, feats, labels = ME.utils.sparse_quantize(
         coords_aug, feats, labels=labels, ignore_label=self.ignore_label)
+    # info(f'after ME: {type(coords_aug)}, {type(feats)}, {type(labels)}')
+    # TODO Really wierd behavior here! Try to figure out why
+    try:
+        coords_aug = coords_aug.numpy()
+    except:
+        pass
 
     return coords_aug, feats, labels, rigid_transformation.flatten()
 

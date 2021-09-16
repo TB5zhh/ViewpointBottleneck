@@ -18,7 +18,8 @@ import numpy as np
 import torch
 from plyfile import PlyData
 from torch.utils.data import DataLoader, Dataset
-
+from IPython import embed
+import logging
 import lib.transforms as t
 from lib.dataloader import DistributedInfSampler, InfSampler
 from lib.distributed_utils import get_world_size
@@ -282,6 +283,8 @@ class VoxelizationDataset(VoxelizationDatasetBase):
             coords = coords[inds]
             feats = feats[inds]
             labels = labels[inds]
+        # import logging
+
 
         # Prevoxel transformations
         if self.prevoxel_transform is not None:
@@ -291,7 +294,8 @@ class VoxelizationDataset(VoxelizationDatasetBase):
                                                                         feats,
                                                                         labels,
                                                                         center=center)
-
+        # logging.info(type(coords))
+        # exit(-1)
         # coords = coords.numpy()
         # map labels not used for evaluation to ignore_label
         if self.input_transform is not None:

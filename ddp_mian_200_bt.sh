@@ -5,17 +5,18 @@ set -x
 set -e
 
 set -o pipefail
-export CUDA_VISIBLE_DEVICES=0,3
+export CUDA_VISIBLE_DEVICES=4,5
 PYTHONUNBUFFERED="True"
-DATAPATH=/data/luoly/dataset/Min_scan/eff_200/train
-TESTDATAPATH=/data/luoly/dataset/Min_scan/scan_processed/train
+DATAPATH=/mnt/air-01/luoly/dataset/Min_scan/eff_200/train
+TESTDATAPATH=/mnt/air-01/luoly/dataset/Min_scan/scan_processed/train
  # Download ScanNet segmentation dataset and change the path here
-PRETRAIN=/data/tbw/STSegmentation/log/checkpoint_NoneRes16UNet34C_20000.pth # For finetuning, use the checkpoint path here.
+PRETRAIN=/mnt/air-01/tbw/STSegmentation/log/checkpoint_NoneRes16UNet34C_20000.pth # For finetuning, use the checkpoint path here.
 MODEL=Res16UNet34C
-BATCH_SIZE=${BATCH_SIZE:-8}
+BATCH_SIZE=${BATCH_SIZE:-1}
 TIME=$(date +"%Y-%m-%d_%H-%M-%S")
 # LOG_DIR=/home/aidrive1/workspace/luoly/dataset/Min_scan/eff_200/fps_log/200/512/tmp_dir_scannet
-LOG_DIR=/data/tbw/STSegmentation/log/512_finetune_20000_iter_200
+LOG_DIR=/var/tmp
+# LOG_DIR=/data/tbw/STSegmentation/log/512_finetune_20000_iter_200
 LOG="$LOG_DIR/$TIME.txt"
 
 python -m ddp_main \
